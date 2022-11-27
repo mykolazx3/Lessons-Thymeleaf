@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Product list</title>
+
+    <!--STOMP-->
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+
+    <!--app.js dependance: jquery-->
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/ws.js"></script>
+</head>
+<body>
+
+
+<table border="1" align="center" id="product-table">
+    <tr>
+        <td>id</td>
+        <td>title</td>
+        <td>
+            <soup id="sizeOfProductQuantity" th:text="${products.size()}">size</soup>
+        </td>
+    </tr>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.id}">Cheese</td>
+        <td th:text="${product.title}">Cheese</td>
+        <td>
+            <!--<a th:href="@{/products/{id}/bucket(id=${product.id})}">Add to bucket</a>-->
+            <button th:onclick="sendContent3([[${product.id}]])">AddToBucket</button>
+        </td>
+
+    </tr>
+</table>
+
+
+<form id="form-add-product" style="text-align: center">
+    <table align="center">
+        <tr>
+            <td>Id</td>
+            <td><input type="id" id="id"></td>
+        </tr>
+        <tr>
+            <td>Title</td>
+            <td><input type="text" id="title"></td>
+        </tr>
+    </table>
+    <button id="send" type="submit">Submit</button>
+</form>
+<!------------------------------------------------------------------>
+<form id="form-add-product2" style="text-align: center">
+    <table align="center">
+        <tr>
+            <td>Id</td>
+            <td><input type="id" id="id2"></td>
+        </tr>
+        <tr>
+            <td>Title</td>
+            <td><input type="text" id="title2"></td>
+        </tr>
+    </table>
+    <button id="send2" type="submit">Submit</button>
+</form>
+<!----------------------------------------------------------------->
+
+<table border="1" align="center" id="bucket-table">
+    <tr>
+        <td>id</td>
+        <td>title</td>
+
+    </tr>
+    <tr>
+        <td></td>
+        <td id="sizeOfProductInBucket" th:text="${productsFromBucket.size}">size</td>
+    </tr>
+
+    <tr th:each="product : ${productsFromBucket}">
+        <td th:text="${product.id}">Cheese</td>
+        <td th:text="${product.title}">Cheese</td>
+    </tr>
+
+</table>
+
+</body>
+</html>
