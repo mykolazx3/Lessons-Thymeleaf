@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Inline Example</title>
+    <!--    хз-->
+    <script th:src="@{/js/libs/jquery-3.6.1.js}"></script>
+    <!--    робочий-->
+    <script src="/js/libs/jquery-3.6.1.js"></script>
+
+    <style th:inline ="CSS">
+        .[[${classname}]]{
+            background-color:[[${color}]];
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="container">
+        <h3 style="color: green; margin-right: 10em" class="text-center display-4 font-weight-bold pt-5 ">Thymeleaf
+            course</h3>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <span style="color: green; margin-right: 1.5em">Hello, [[${defaultName}]]!</span>
+            <span style="color: green; margin-right: 1.5em" th:text="'instead of'"></span>
+            <span style="color: green; margin-right: 1.5em">Hello, <span th:text="${defaultName}"></span>!</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <span th:inline="none" style="color: green; margin-right: 1.5em">[[${inlineMessage}]]!</span>
+            <span style="color: green; margin-right: 1.5em">[(${inlineMessage})]!</span>
+        </div>
+    </div>
+
+    <!--    To disable th:inlining-->
+    <!--    <p th:inline="none"></p>-->
+
+    <br>
+    <!--    th:inline="javascript">-->
+    <div class="container">
+        <label for="thinJavascript"> th:inline="javascript" : </label>
+        <span id="thinJavascript">should be replaced</span>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    $(document).ready(function () {
+        var username = [[${appleJuiceName}]];
+        // var username = [(${appleJuiceName})];
+        $('#thinJavascript').replaceWith('<span id=thinJavascript" style="color:#1c7430">' + username + '</span>')
+    })
+</script>
+
+</body>
+</html>
